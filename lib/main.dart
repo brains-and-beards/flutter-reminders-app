@@ -7,19 +7,11 @@ import 'package:hello_world/store/store.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:rxdart/subjects.dart';
-
 import 'models/index.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 NotificationAppLaunchDetails notificationAppLaunchDetails;
-
-final BehaviorSubject<AlarmNotification> didReceiveLocalNotificationSubject =
-    BehaviorSubject<AlarmNotification>();
-
-final BehaviorSubject<String> selectNotificationSubject =
-    BehaviorSubject<String>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +41,7 @@ class LunchingApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               StoreConnector<AppState, List<Alarm>>(
-                converter: (store) => store.state.alarms,
+                converter: (store) => store.state.alarmsState.alarms,
                 builder: (context, alarms) {
                   return Text(
                     alarms.length > 0 && alarms[alarms.length - 1] != null

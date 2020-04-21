@@ -1,11 +1,19 @@
-import 'package:hello_world/models/Alarm.dart';
+import 'package:flutter/material.dart';
+import 'package:hello_world/store/AlarmsState.dart';
 
+@immutable
 class AppState {
-  final List<Alarm> alarms;
+  final AlarmsState alarmsState;
 
-  AppState({this.alarms});
+  AppState({@required this.alarmsState});
 
-  AppState copyWith({List<Alarm> alarms}) {
-    return AppState(alarms: alarms ?? this.alarms);
+  factory AppState.initial() {
+    return AppState(
+      alarmsState: AlarmsState.initial(),
+    );
+  }
+
+  AppState copyWith({AlarmsState alarmsState}) {
+    return AppState(alarmsState: alarmsState ?? this.alarmsState);
   }
 }

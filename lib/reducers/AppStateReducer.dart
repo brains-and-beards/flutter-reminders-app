@@ -1,25 +1,28 @@
 import 'package:hello_world/actions/actions.dart';
 import 'package:hello_world/models/Alarm.dart';
+import 'package:hello_world/store/AlarmsState.dart';
 import 'package:hello_world/store/AppState.dart';
 import 'package:redux/redux.dart';
 
 AppState appReducer(AppState state, dynamic action) => AppState(
-      alarms: alarmsReducer(state.alarms, action),
+      alarmsState: alarmsReducer(state.alarmsState, action),
     );
 
-final alarmsReducer = combineReducers<List<Alarm>>([
-  TypedReducer<List<Alarm>, SetAlarmAction>(_setAlarmAction),
-  TypedReducer<List<Alarm>, ClearAlarmAction>(_clearAlarmAction),
+final alarmsReducer = combineReducers<AlarmsState>([
+  TypedReducer<AlarmsState, SetAlarmAction>(_setAlarmAction),
+  TypedReducer<AlarmsState, ClearAlarmAction>(_clearAlarmAction),
 ]);
 
-List<Alarm> _setAlarmAction(List<Alarm> list, SetAlarmAction action) {
-  if (list != null) {
-    list.add(new Alarm(
+AlarmsState _setAlarmAction(AlarmsState state, SetAlarmAction action) {
+  var alarmsList = state.alarms;
+  if (alarmsList != null) {
+    alarmsList.add(new Alarm(
         notificationSent: false,
         repeat: true,
         time: new DateTime.now().toIso8601String()));
   }
-  return list;
+  return state.copyWith(alarms: alarmsList);
 }
 
-List<Alarm> _clearAlarmAction(_, __) => [];
+AlarmsState _clearAlarmAction(AlarmsState state, ClearAlarmAction action) =>
+    state.copyWith(alarms: []);

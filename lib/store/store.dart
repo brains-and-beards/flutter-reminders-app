@@ -5,7 +5,7 @@ import 'package:redux/redux.dart';
 Future<Store<AppState>> createStore() async {
   return Store(
     appReducer,
-    initialState: AppState(alarms: []),
+    initialState: new AppState.initial(),
     middleware: [],
   );
 }
