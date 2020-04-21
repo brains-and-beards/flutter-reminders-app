@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hello_world/utils/notificationHelper.dart';
 
 class NotificationSwitchBuilder extends StatefulWidget {
-  bool isSwitched = true;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  NotificationSwitchBuilder({Key key, this.flutterLocalNotificationsPlugin});
 
-  createState() => NotificationSwitchBuilderState();
+  @override
+  _NotificationSwitchBuilderState createState() =>
+      _NotificationSwitchBuilderState();
 }
 
-class NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
+class _NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
+  bool isSwitched = true;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -16,10 +23,13 @@ class NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
               children: <Widget>[
             Text('Notification switch'),
             Switch(
-              value: widget.isSwitched,
+              value: isSwitched,
               onChanged: (value) {
+                if (!value) {
+                  turnOffNotification(widget.flutterLocalNotificationsPlugin);
+                }
                 setState(() {
-                  widget.isSwitched = value;
+                  isSwitched = value;
                 });
               },
               activeTrackColor: Colors.lightBlueAccent,

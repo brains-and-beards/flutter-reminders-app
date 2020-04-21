@@ -37,7 +37,7 @@ Future<void> initNotifications(
 Future<void> showNotification(
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your channel id', 'Natalia', 'your channel description',
+      '0', 'Natalia', 'your channel description',
       importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
   var platformChannelSpecifics = NotificationDetails(
@@ -49,7 +49,7 @@ Future<void> showNotification(
 
 Future<void> turnOffNotification(
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-  await flutterLocalNotificationsPlugin.cancel(0);
+  await flutterLocalNotificationsPlugin.cancelAll();
 }
 
 Future<void> scheduleNotification(
