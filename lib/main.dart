@@ -4,10 +4,31 @@ import 'package:hello_world/actions/actions.dart';
 import 'package:hello_world/models/Alarm.dart';
 import 'package:hello_world/store/AppState.dart';
 import 'package:hello_world/store/store.dart';
+import 'package:hello_world/utils/notificationHelper.dart';
 import 'package:redux/redux.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rxdart/subjects.dart';
 
-void main() async {
+import 'models/index.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+NotificationAppLaunchDetails notificationAppLaunchDetails;
+
+final BehaviorSubject<AlarmNotification> didReceiveLocalNotificationSubject =
+    BehaviorSubject<AlarmNotification>();
+
+final BehaviorSubject<String> selectNotificationSubject =
+    BehaviorSubject<String>();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final store = await createStore();
+
+  notificationAppLaunchDetails =
+      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  await initNotifications(flutterLocalNotificationsPlugin);
+  await showNotification(flutterLocalNotificationsPlugin);
 
   runApp(LunchingApp(store));
 }
