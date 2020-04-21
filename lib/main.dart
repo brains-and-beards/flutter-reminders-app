@@ -7,6 +7,7 @@ import 'package:hello_world/store/store.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'builder/NotificationSwitchBuilder.dart';
 import 'models/index.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -40,6 +41,7 @@ class LunchingApp extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              NotificationSwitchBuilder(),
               StoreConnector<AppState, List<Alarm>>(
                 converter: (store) => store.state.alarmsState.alarms,
                 builder: (context, alarms) {
@@ -61,7 +63,7 @@ class LunchingApp extends StatelessWidget {
           builder: (context, callback) {
             return FloatingActionButton(
               onPressed: callback,
-              tooltip: 'asdasdasd',
+              tooltip: 'hello',
               child: Icon(Icons.add),
             );
           },
