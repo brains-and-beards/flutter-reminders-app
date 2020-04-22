@@ -21,7 +21,7 @@ class _NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-            Text('Notification switch'),
+            Text('Cancel all'),
             Switch(
               value: isSwitched,
               onChanged: (value) {

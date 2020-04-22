@@ -52,6 +52,12 @@ Future<void> turnOffNotification(
   await flutterLocalNotificationsPlugin.cancelAll();
 }
 
+Future<void> turnOffNotificationById(
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+    num id) async {
+  await flutterLocalNotificationsPlugin.cancel(id);
+}
+
 Future<void> scheduleNotification(
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
   var scheduledNotificationDateTime = DateTime.now().add(Duration(seconds: 5));

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:hello_world/actions/actions.dart';
 import 'package:hello_world/models/Alarm.dart';
 import 'package:hello_world/store/AppState.dart';
 import 'package:hello_world/store/store.dart';
@@ -17,8 +16,8 @@ NotificationAppLaunchDetails notificationAppLaunchDetails;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final store = await createStore();
-
+  await initStore();
+  final store = getStore();
   notificationAppLaunchDetails =
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(flutterLocalNotificationsPlugin);
@@ -46,42 +45,39 @@ class LunchingApp extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  NotificationSwitchBuilder(
-                    flutterLocalNotificationsPlugin:
-                        flutterLocalNotificationsPlugin,
-                    key: new Key('value'),
+                  Row(
+                    children: <Widget>[
+                      NotificationSwitchBuilder(
+                        flutterLocalNotificationsPlugin:
+                            flutterLocalNotificationsPlugin,
+                        key: new Key('value'),
+                      ),
+                      ReminderAlertBuilder(),
+                      FlatButton(
+                          child: Text('send notification'),
+                          color: Colors.blue,
+                          onPressed: () async => await scheduleNotification(
+                              flutterLocalNotificationsPlugin)),
+                    ],
                   ),
-                  ReminderAlertBuilder(),
-                  FlatButton(
-                      child: Text('send notification'),
-                      color: Colors.blue,
-                      onPressed: () async => await scheduleNotification(
-                          flutterLocalNotificationsPlugin)),
-                  StoreConnector<AppState, List<Alarm>>(
-                    converter: (store) => store.state.alarmsState.alarms,
-                    builder: (context, alarms) {
-                      return Text(
-                        alarms.length > 0 && alarms[alarms.length - 1] != null
-                            ? alarms[alarms.length - 1].time
-                            : '',
-                        style: Theme.of(context).textTheme.display1,
-                      );
-                    },
+                  SizedBox(
+                    child: StoreConnector<AppState, List<Alarm>>(
+                        converter: (store) => store.state.alarmsState.alarms,
+                        builder: (context, alarms) {
+                          return ListView.builder(
+                              itemCount: alarms.length,
+                              itemBuilder: (context, index) {
+                                final item = alarms[index];
+                                return ListTile(
+                                  title: Text(item.name),
+                                  subtitle: Text(item.time),
+                                );
+                              });
+                        }),
+                    height: 300,
                   ),
                 ],
               ),
-            ),
-            floatingActionButton: StoreConnector<AppState, VoidCallback>(
-              converter: (store) {
-                return () => store.dispatch(SetAlarmAction());
-              },
-              builder: (context, callback) {
-                return FloatingActionButton(
-                  onPressed: callback,
-                  tooltip: 'hello',
-                  child: Icon(Icons.add),
-                );
-              },
             ),
           )),
       store: store,
