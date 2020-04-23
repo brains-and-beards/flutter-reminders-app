@@ -59,37 +59,41 @@ Future<void> turnOffNotificationById(
 }
 
 Future<void> scheduleNotification(
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-  var scheduledNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
-  var vibrationPattern = Int64List(4);
-  vibrationPattern[0] = 0;
-  vibrationPattern[1] = 1000;
-  vibrationPattern[2] = 5000;
-  vibrationPattern[3] = 2000;
-
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+    String id,
+    String body,
+    DateTime scheduledNotificationDateTime) async {
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your other channel id',
-      'your other channel name',
-      'your other channel description',
-      icon: 'secondary_icon',
-      // sound: RawResourceAndroidNotificationSound('slow_spring_board'),
-      largeIcon: DrawableResourceAndroidBitmap('sample_large_icon'),
-      vibrationPattern: vibrationPattern,
-      enableLights: true,
-      color: const Color.fromARGB(255, 255, 0, 0),
-      ledColor: const Color.fromARGB(255, 255, 0, 0),
-      ledOnMs: 1000,
-      ledOffMs: 500);
-  var iOSPlatformChannelSpecifics =
-      IOSNotificationDetails(sound: 'slow_spring_board.aiff');
+    id,
+    'Reminder notifications',
+    'Remember about it',
+    icon: 'secondary_icon',
+    largeIcon: DrawableResourceAndroidBitmap('sample_large_icon'),
+  );
+  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
   var platformChannelSpecifics = NotificationDetails(
       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-  await flutterLocalNotificationsPlugin.schedule(
-      0,
-      'scheduled title',
-      'scheduled body',
-      scheduledNotificationDateTime,
-      platformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.schedule(0, 'Reminder', body,
+      scheduledNotificationDateTime, platformChannelSpecifics);
+}
+
+Future<void> scheduleNotificationPeriodically(
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
+    String id,
+    String body,
+    RepeatInterval interval) async {
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    id,
+    'Reminder notifications',
+    'Remember about it',
+    icon: 'secondary_icon',
+    largeIcon: DrawableResourceAndroidBitmap('sample_large_icon'),
+  );
+  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.periodicallyShow(
+      0, 'Reminder', body, interval, platformChannelSpecifics);
 }
 
 void requestIOSPermissions(

@@ -30,6 +30,9 @@ dependencies:
   key_value_store_flutter:
   shared_preferences:
   rxdart: ^0.23.1
+  redux_persist: ^0.8.3
+  path_provider: ^1.6.7
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

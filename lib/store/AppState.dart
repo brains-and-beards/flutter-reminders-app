@@ -13,6 +13,16 @@ class AppState {
     );
   }
 
+  dynamic toJson() {
+    return {'alarmsState': this.alarmsState.toJson()};
+  }
+
+  static AppState fromJson(dynamic json) {
+    return json != null
+        ? AppState(alarmsState: AlarmsState.fromJson(json["alarmsState"]))
+        : {};
+  }
+
   AppState copyWith({AlarmsState alarmsState}) {
     return AppState(alarmsState: alarmsState ?? this.alarmsState);
   }

@@ -17,11 +17,8 @@ final alarmsReducer = combineReducers<AlarmsState>([
 AlarmsState _setAlarmAction(AlarmsState state, SetAlarmAction action) {
   var alarmsList = state.alarms;
   if (alarmsList != null) {
-    alarmsList.add(new Alarm(
-        notificationSent: action.notificationSent,
-        repeat: action.repeat,
-        name: action.name,
-        time: action.time));
+    alarmsList.add(
+        new Alarm(repeat: action.repeat, name: action.name, time: action.time));
   }
   return state.copyWith(alarms: alarmsList);
 }

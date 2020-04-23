@@ -18,10 +18,9 @@ class _NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Center(
-          child: Column(
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-            Text('Cancel all'),
             Switch(
               value: isSwitched,
               onChanged: (value) {
@@ -34,6 +33,10 @@ class _NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
               },
               activeTrackColor: Colors.lightBlueAccent,
               activeColor: Colors.blueAccent,
+            ),
+            Text(
+              'CANCEL ALL',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ])),
     );

@@ -1,12 +1,11 @@
-import 'package:hello_world/models/index.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SetAlarmAction {
   final String time;
-  final RepeatAction repeat;
-  final bool notificationSent;
+  final RepeatInterval repeat;
   final String name;
 
-  SetAlarmAction({this.time, this.repeat, this.notificationSent, this.name});
+  SetAlarmAction({this.time, this.repeat, this.name});
 }
 
 class RemoveAlarmAction {
