@@ -16,7 +16,7 @@ class Alarm {
     return json != null
         ? new Alarm(
             time: json["time"],
-            repeat: RepeatInterval.Hourly,
+            repeat: parseRepeatIntervalToObject(json["repeat"]),
             name: json["name"])
         : null;
   }
@@ -24,8 +24,34 @@ class Alarm {
   dynamic toJson() {
     return {
       "time": time,
-      "repeat": 'Hourly',
+      "repeat": parseRepeatIntervalToString(repeat),
       "name": name,
     };
+  }
+
+  static String parseRepeatIntervalToString(RepeatInterval repeat) {
+    if (repeat == RepeatInterval.Daily) {
+      return "Daily";
+    } else if (repeat == RepeatInterval.EveryMinute) {
+      return "EveryMinute";
+    } else if (repeat == RepeatInterval.Hourly) {
+      return "Hourly";
+    } else if (repeat == RepeatInterval.Weekly) {
+      return "Weekly";
+    }
+    return '';
+  }
+
+  static RepeatInterval parseRepeatIntervalToObject(String repeat) {
+    if (repeat == "Daily") {
+      return RepeatInterval.Daily;
+    } else if (repeat == "EveryMinute") {
+      return RepeatInterval.EveryMinute;
+    } else if (repeat == "Hourly") {
+      return RepeatInterval.Hourly;
+    } else if (repeat == "Weekly") {
+      return RepeatInterval.Weekly;
+    }
+    return RepeatInterval.Weekly;
   }
 }

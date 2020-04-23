@@ -25,7 +25,6 @@ Future<void> main() async {
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(flutterLocalNotificationsPlugin);
   requestIOSPermissions(flutterLocalNotificationsPlugin);
-  await showNotification(flutterLocalNotificationsPlugin);
 
   runApp(LunchingApp(store));
 }
@@ -104,22 +103,31 @@ class LunchingApp extends StatelessWidget {
                                                 Text(item.name)
                                               ],
                                             ),
-                                            subtitle: Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 10),
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      "Start time: ",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    Text(df.format(
-                                                        DateTime.parse(
-                                                            item.time))),
-                                                  ],
-                                                )));
+                                            subtitle: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 10),
+                                                      child: Row(
+                                                        children: <Widget>[
+                                                          Text(
+                                                            "Start time: ",
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          Text(df.format(
+                                                              DateTime.parse(
+                                                                  item.time))),
+                                                        ],
+                                                      )),
+                                                  Text(Alarm
+                                                      .parseRepeatIntervalToString(
+                                                          item.repeat))
+                                                ]));
                                       });
                                 }),
                             height: 550,
