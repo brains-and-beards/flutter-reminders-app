@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hello_world/main.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
 
 class NotificationSwitchBuilder extends StatefulWidget {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-  NotificationSwitchBuilder({Key key, this.flutterLocalNotificationsPlugin});
-
   @override
   _NotificationSwitchBuilderState createState() =>
       _NotificationSwitchBuilderState();
@@ -25,7 +22,7 @@ class _NotificationSwitchBuilderState extends State<NotificationSwitchBuilder> {
               value: isSwitched,
               onChanged: (value) {
                 if (!value) {
-                  turnOffNotification(widget.flutterLocalNotificationsPlugin);
+                  turnOffNotification(flutterLocalNotificationsPlugin);
                 }
                 setState(() {
                   isSwitched = value;

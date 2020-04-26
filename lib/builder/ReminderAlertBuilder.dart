@@ -7,6 +7,9 @@ import 'package:hello_world/models/Alarm.dart';
 import 'package:hello_world/store/store.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
 
+import 'ReminderCustomItem.dart';
+import 'ReminderItem.dart';
+
 final playMusic = 'Play music';
 final lookAfterPlants = 'Look after plants';
 final walk = '5 min walk';
@@ -47,7 +50,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RaisedButton(
-            child: Text('Manage reminder'),
+            child: Text('Manage reminders'),
             color: Colors.blue,
             onPressed: _showMaterialDialog,
             textColor: Colors.white,
@@ -87,80 +90,36 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                                   decoration: TextDecoration.none,
                                   fontWeight: FontWeight.w500),
                             )),
-                        Card(
-                          margin: new EdgeInsets.only(left: 0, right: 0),
-                          child: CheckboxListTile(
-                              title: Row(
-                                children: <Widget>[
-                                  Icon(
-                                    remindersIcons[playMusic],
-                                    color: Colors.black,
-                                    size: 30.0,
-                                  ),
-                                  Padding(
-                                    padding: new EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      playMusic,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black,
-                                          decoration: TextDecoration.none,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              value: playMusicReminder,
-                              onChanged: (value) {
-                                setState(() {
-                                  playMusicReminder = value;
-                                });
-                                _configurePlayMusic(value);
-                              }),
+                        ReminderItem(
+                          onChanged: (value) {
+                            setState(() {
+                              playMusicReminder = value;
+                            });
+                            _configurePlayMusic(value);
+                          },
+                          checkBoxValue: playMusicReminder,
+                          iconName: playMusic,
                         ),
                         Padding(
                             padding: new EdgeInsets.only(bottom: 10, top: 10),
                             child: Text(
-                              'Reminde me every week',
+                              'Remind me every week',
                               style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
                                   decoration: TextDecoration.none,
                                   fontWeight: FontWeight.w500),
                             )),
-                        Card(
-                            margin:
-                                new EdgeInsets.only(left: 0, right: 0, top: 5),
-                            child: CheckboxListTile(
-                                value: lookAfterPlantsReminder,
-                                onChanged: (value) {
-                                  setState(() {
-                                    lookAfterPlantsReminder = value;
-                                  });
-                                  _configureLookAfterPlants(value);
-                                },
-                                title: Row(children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        remindersIcons[lookAfterPlants],
-                                        color: Colors.green,
-                                        size: 30.0,
-                                      ),
-                                      Padding(
-                                          padding:
-                                              new EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            lookAfterPlants,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.black,
-                                                decoration: TextDecoration.none,
-                                                fontWeight: FontWeight.normal),
-                                          ))
-                                    ],
-                                  ),
-                                ]))),
+                        ReminderItem(
+                          onChanged: (value) {
+                            setState(() {
+                              lookAfterPlantsReminder = value;
+                            });
+                            _configureLookAfterPlants(value);
+                          },
+                          checkBoxValue: lookAfterPlantsReminder,
+                          iconName: lookAfterPlants,
+                        ),
                         Padding(
                             padding: new EdgeInsets.only(bottom: 10, top: 10),
                             child: Text(
@@ -171,71 +130,26 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                                   decoration: TextDecoration.none,
                                   fontWeight: FontWeight.w500),
                             )),
-                        Card(
-                            margin: new EdgeInsets.only(left: 0, right: 0),
-                            child: CheckboxListTile(
-                                value: walkFor5minReminder,
-                                onChanged: (value) {
-                                  setState(() {
-                                    walkFor5minReminder = value;
-                                  });
-                                  _configure5minWalk(value);
-                                },
-                                title: Row(children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        remindersIcons[walk],
-                                        color: Colors.red,
-                                        size: 30.0,
-                                      ),
-                                      Padding(
-                                          padding:
-                                              new EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            walk,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.black,
-                                                decoration: TextDecoration.none,
-                                                fontWeight: FontWeight.normal),
-                                          ))
-                                    ],
-                                  )
-                                ]))),
-                        Card(
-                            margin:
-                                new EdgeInsets.only(left: 0, right: 0, top: 10),
-                            child: CheckboxListTile(
-                                value: drinkSomeWaterReminder,
-                                onChanged: (value) {
-                                  setState(() {
-                                    drinkSomeWaterReminder = value;
-                                  });
-                                  _configureDrinkSomeWater(value);
-                                },
-                                title: Row(children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        remindersIcons[drinkingWater],
-                                        color: Colors.blue,
-                                        size: 30.0,
-                                      ),
-                                      Padding(
-                                          padding:
-                                              new EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            drinkingWater,
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.black,
-                                                decoration: TextDecoration.none,
-                                                fontWeight: FontWeight.normal),
-                                          ))
-                                    ],
-                                  )
-                                ]))),
+                        ReminderItem(
+                          onChanged: (value) {
+                            setState(() {
+                              walkFor5minReminder = value;
+                            });
+                            _configure5minWalk(value);
+                          },
+                          checkBoxValue: walkFor5minReminder,
+                          iconName: walk,
+                        ),
+                        ReminderItem(
+                          onChanged: (value) {
+                            setState(() {
+                              drinkSomeWaterReminder = value;
+                            });
+                            _configureDrinkSomeWater(value);
+                          },
+                          checkBoxValue: drinkSomeWaterReminder,
+                          iconName: drinkingWater,
+                        ),
                         Padding(
                             padding: new EdgeInsets.only(bottom: 10, top: 10),
                             child: Text(
@@ -246,64 +160,19 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                                   decoration: TextDecoration.none,
                                   fontWeight: FontWeight.w500),
                             )),
-                        Card(
-                            margin: new EdgeInsets.only(
-                                left: 0, right: 0, bottom: 10),
-                            child: CheckboxListTile(
-                                value: customReminder,
-                                onChanged: (value) {
-                                  setState(() {
-                                    customReminder = value;
-                                  });
-                                  _configureCustomReminder(value);
-                                },
-                                title: Row(children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        remindersIcons[custom],
-                                        color: Colors.blue,
-                                        size: 30.0,
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Padding(
-                                              padding:
-                                                  new EdgeInsets.only(left: 10),
-                                              child: Text(
-                                                custom,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.black,
-                                                    decoration:
-                                                        TextDecoration.none,
-                                                    fontWeight:
-                                                        FontWeight.normal),
-                                              )),
-                                          SizedBox(
-                                            child: Padding(
-                                                padding: new EdgeInsets.only(
-                                                    top: 10, bottom: 10),
-                                                child: RaisedButton(
-                                                  color: Colors.blue,
-                                                  child: Text(
-                                                    'SET TIME',
-                                                    style: TextStyle(
-                                                        fontSize: 10,
-                                                        color: Colors.white),
-                                                  ),
-                                                  onPressed: () {
-                                                    _showTimeDialog();
-                                                  },
-                                                )),
-                                            width: 90,
-                                            height: 40,
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  )
-                                ]))),
+                        ReminderCustomItem(
+                          checkBoxValue: customReminder,
+                          iconName: custom,
+                          onChanged: (value) {
+                            setState(() {
+                              customReminder = value;
+                            });
+                            _configureCustomReminder(value);
+                          },
+                          showTimeDialog: () {
+                            _showTimeDialog(setState);
+                          },
+                        ),
                         Padding(
                           padding: new EdgeInsets.only(top: 20, bottom: 10),
                           child: RaisedButton(
@@ -324,7 +193,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
         });
   }
 
-  _showTimeDialog() async {
+  _showTimeDialog(StateSetter setState) async {
     TimeOfDay selectedTime = await showTimePicker(
       initialTime: TimeOfDay.now(),
       context: context,
@@ -332,7 +201,10 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
 
     setState(() {
       customNotificationTime = selectedTime;
+      customReminder = true;
     });
+
+    _configureCustomReminder(true);
   }
 
   _prepareState() {
@@ -410,22 +282,23 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
   }
 
   void _configureCustomReminder(bool value) {
-    if (value) {
-      var now = new DateTime.now();
+    if (customNotificationTime != null) {
+      if (value) {
+        var now = new DateTime.now();
+        var notificationTime = new DateTime(now.year, now.month, now.day,
+            customNotificationTime.hour, customNotificationTime.minute);
 
-      getStore().dispatch(SetAlarmAction(
-          time: now.toIso8601String(),
-          name: custom,
-          repeat: RepeatInterval.Daily));
+        getStore().dispatch(SetAlarmAction(
+            time: notificationTime.toIso8601String(),
+            name: custom,
+            repeat: RepeatInterval.Daily));
 
-      var notificationTime = new DateTime(now.year, now.month, now.day,
-          customNotificationTime.hour, customNotificationTime.minute);
-
-      scheduleNotification(
-          flutterLocalNotificationsPlugin, '4', custom, notificationTime);
-    } else {
-      getStore().dispatch(RemoveAlarmAction(custom));
-      turnOffNotificationById(flutterLocalNotificationsPlugin, 4);
+        scheduleNotification(
+            flutterLocalNotificationsPlugin, '4', custom, notificationTime);
+      } else {
+        getStore().dispatch(RemoveAlarmAction(custom));
+        turnOffNotificationById(flutterLocalNotificationsPlugin, 4);
+      }
     }
   }
 }
