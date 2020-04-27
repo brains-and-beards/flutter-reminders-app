@@ -16,7 +16,7 @@ class Reminder {
     return json != null
         ? new Reminder(
             time: json["time"],
-            repeat: parseRepeatIntervalToObject(json["repeat"]),
+            repeat: parseRepeatIntervalToValue(json["repeat"]),
             name: json["name"])
         : null;
   }
@@ -42,7 +42,7 @@ class Reminder {
     return '';
   }
 
-  static RepeatInterval parseRepeatIntervalToObject(String repeat) {
+  static RepeatInterval parseRepeatIntervalToValue(String repeat) {
     if (repeat == "Daily") {
       return RepeatInterval.Daily;
     } else if (repeat == "EveryMinute") {

@@ -140,6 +140,16 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                           checkBoxValue: walkFor5minReminder,
                           iconName: walk,
                         ),
+                        Padding(
+                            padding: new EdgeInsets.only(bottom: 10, top: 10),
+                            child: Text(
+                              'Remind me every minute',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.w500),
+                            )),
                         ReminderItem(
                           onChanged: (value) {
                             setState(() {
