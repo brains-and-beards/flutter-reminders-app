@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/main.dart';
-import 'package:hello_world/models/Alarm.dart';
+import 'package:hello_world/models/index.dart';
 
 import 'ReminderAlertBuilder.dart';
 
 class RemindersList extends StatelessWidget {
-  final List<Alarm> alarms;
-  RemindersList({this.alarms});
+  final List<Reminder> reminders;
+  RemindersList({this.reminders});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class RemindersList extends StatelessWidget {
         separatorBuilder: (context, index) {
           return Divider();
         },
-        itemCount: alarms.length,
+        itemCount: reminders.length,
         itemBuilder: (context, index) {
-          final item = alarms[index];
+          final item = reminders[index];
           return ListTile(
               title: Row(
                 children: <Widget>[
@@ -42,7 +42,7 @@ class RemindersList extends StatelessWidget {
                             Text(df.format(DateTime.parse(item.time))),
                           ],
                         )),
-                    Text(Alarm.parseRepeatIntervalToString(item.repeat))
+                    Text(Reminder.parseRepeatIntervalToString(item.repeat))
                   ]));
         });
     ;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:hello_world/models/Alarm.dart';
 import 'package:hello_world/store/AppState.dart';
 import 'package:hello_world/store/store.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
@@ -78,11 +77,11 @@ class LunchingApp extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(15.0)),
                           ),
                           child: SizedBox(
-                            child: StoreConnector<AppState, List<Alarm>>(
+                            child: StoreConnector<AppState, List<Reminder>>(
                                 converter: (store) =>
-                                    store.state.alarmsState.alarms,
-                                builder: (context, alarms) {
-                                  return RemindersList(alarms: alarms);
+                                    store.state.remindersState.reminders,
+                                builder: (context, reminders) {
+                                  return RemindersList(reminders: reminders);
                                 }),
                             height: 550,
                           ))),

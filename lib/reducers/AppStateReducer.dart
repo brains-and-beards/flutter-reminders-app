@@ -1,33 +1,36 @@
 import 'package:hello_world/actions/actions.dart';
-import 'package:hello_world/models/Alarm.dart';
-import 'package:hello_world/store/AlarmsState.dart';
+import 'package:hello_world/models/Reminder.dart';
 import 'package:hello_world/store/AppState.dart';
+import 'package:hello_world/store/RemindersState.dart';
 import 'package:redux/redux.dart';
 
 AppState appReducer(AppState state, dynamic action) => AppState(
-      alarmsState: alarmsReducer(state.alarmsState, action),
+      remindersState: remindersReducer(state.remindersState, action),
     );
 
-final alarmsReducer = combineReducers<AlarmsState>([
-  TypedReducer<AlarmsState, SetAlarmAction>(_setAlarmAction),
-  TypedReducer<AlarmsState, ClearAlarmAction>(_clearAlarmAction),
-  TypedReducer<AlarmsState, RemoveAlarmAction>(_removeAlarmAction),
+final remindersReducer = combineReducers<RemindersState>([
+  TypedReducer<RemindersState, SetReminderAction>(_setReminderAction),
+  TypedReducer<RemindersState, ClearReminderAction>(_clearReminderAction),
+  TypedReducer<RemindersState, RemoveReminderAction>(_removeReminderAction),
 ]);
 
-AlarmsState _setAlarmAction(AlarmsState state, SetAlarmAction action) {
-  var alarmsList = state.alarms;
-  if (alarmsList != null) {
-    alarmsList.add(
-        new Alarm(repeat: action.repeat, name: action.name, time: action.time));
+RemindersState _setReminderAction(
+    RemindersState state, SetReminderAction action) {
+  var remindersList = state.reminders;
+  if (remindersList != null) {
+    remindersList.add(new Reminder(
+        repeat: action.repeat, name: action.name, time: action.time));
   }
-  return state.copyWith(alarms: alarmsList);
+  return state.copyWith(reminders: remindersList);
 }
 
-AlarmsState _clearAlarmAction(AlarmsState state, ClearAlarmAction action) =>
-    state.copyWith(alarms: []);
+RemindersState _clearReminderAction(
+        RemindersState state, ClearReminderAction action) =>
+    state.copyWith(reminders: []);
 
-AlarmsState _removeAlarmAction(AlarmsState state, RemoveAlarmAction action) {
-  var alarmsList = state.alarms;
-  alarmsList.removeWhere((alarm) => alarm.name == action.name);
-  return state.copyWith(alarms: alarmsList);
+RemindersState _removeReminderAction(
+    RemindersState state, RemoveReminderAction action) {
+  var remindersList = state.reminders;
+  remindersList.removeWhere((reminder) => reminder.name == action.name);
+  return state.copyWith(reminders: remindersList);
 }

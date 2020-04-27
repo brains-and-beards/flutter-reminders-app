@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hello_world/actions/actions.dart';
 import 'package:hello_world/main.dart';
-import 'package:hello_world/models/Alarm.dart';
+import 'package:hello_world/models/index.dart';
 import 'package:hello_world/store/store.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
 
@@ -208,7 +208,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
   }
 
   _prepareState() {
-    List<Alarm> list = getStore().state.alarmsState.alarms;
+    List<Reminder> list = getStore().state.remindersState.reminders;
     for (var i = 0; i < list.length; i++) {
       if (list[i].name == playMusic) {
         playMusicReminder = true;
@@ -226,7 +226,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
 
   void _configurePlayMusic(bool value) {
     if (value) {
-      getStore().dispatch(SetAlarmAction(
+      getStore().dispatch(SetReminderAction(
           time: new DateTime.now().toIso8601String(),
           name: playMusic,
           repeat: RepeatInterval.Daily));
@@ -235,48 +235,48 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
           playMusic, RepeatInterval.Daily);
     } else {
       turnOffNotificationById(flutterLocalNotificationsPlugin, 0);
-      getStore().dispatch(RemoveAlarmAction(playMusic));
+      getStore().dispatch(RemoveReminderAction(playMusic));
     }
   }
 
   void _configureLookAfterPlants(bool value) {
     if (value) {
-      getStore().dispatch(SetAlarmAction(
+      getStore().dispatch(SetReminderAction(
           time: new DateTime.now().toIso8601String(),
           name: lookAfterPlants,
           repeat: RepeatInterval.Daily));
       scheduleNotificationPeriodically(flutterLocalNotificationsPlugin, '1',
           lookAfterPlants, RepeatInterval.Weekly);
     } else {
-      getStore().dispatch(RemoveAlarmAction(lookAfterPlants));
+      getStore().dispatch(RemoveReminderAction(lookAfterPlants));
       turnOffNotificationById(flutterLocalNotificationsPlugin, 1);
     }
   }
 
   void _configure5minWalk(bool value) {
     if (value) {
-      getStore().dispatch(SetAlarmAction(
+      getStore().dispatch(SetReminderAction(
           time: new DateTime.now().toIso8601String(),
           name: walk,
           repeat: RepeatInterval.Hourly));
       scheduleNotificationPeriodically(
           flutterLocalNotificationsPlugin, '2', walk, RepeatInterval.Hourly);
     } else {
-      getStore().dispatch(RemoveAlarmAction(walk));
+      getStore().dispatch(RemoveReminderAction(walk));
       turnOffNotificationById(flutterLocalNotificationsPlugin, 2);
     }
   }
 
   void _configureDrinkSomeWater(bool value) {
     if (value) {
-      getStore().dispatch(SetAlarmAction(
+      getStore().dispatch(SetReminderAction(
           time: new DateTime.now().toIso8601String(),
           name: drinkingWater,
           repeat: RepeatInterval.Hourly));
       scheduleNotificationPeriodically(flutterLocalNotificationsPlugin, '3',
-          drinkingWater, RepeatInterval.Hourly);
+          drinkingWater, RepeatInterval.EveryMinute);
     } else {
-      getStore().dispatch(RemoveAlarmAction(drinkingWater));
+      getStore().dispatch(RemoveReminderAction(drinkingWater));
       turnOffNotificationById(flutterLocalNotificationsPlugin, 3);
     }
   }
@@ -288,7 +288,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
         var notificationTime = new DateTime(now.year, now.month, now.day,
             customNotificationTime.hour, customNotificationTime.minute);
 
-        getStore().dispatch(SetAlarmAction(
+        getStore().dispatch(SetReminderAction(
             time: notificationTime.toIso8601String(),
             name: custom,
             repeat: RepeatInterval.Daily));
@@ -296,7 +296,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
         scheduleNotification(
             flutterLocalNotificationsPlugin, '4', custom, notificationTime);
       } else {
-        getStore().dispatch(RemoveAlarmAction(custom));
+        getStore().dispatch(RemoveReminderAction(custom));
         turnOffNotificationById(flutterLocalNotificationsPlugin, 4);
       }
     }

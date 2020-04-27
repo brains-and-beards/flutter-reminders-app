@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/store/AlarmsState.dart';
+import 'package:hello_world/store/RemindersState.dart';
 
 @immutable
 class AppState {
-  final AlarmsState alarmsState;
+  final RemindersState remindersState;
 
-  AppState({@required this.alarmsState});
+  AppState({@required this.remindersState});
 
   factory AppState.initial() {
     return AppState(
-      alarmsState: AlarmsState.initial(),
+      remindersState: RemindersState.initial(),
     );
   }
 
   dynamic toJson() {
-    return {'alarmsState': this.alarmsState.toJson()};
+    return {'remindersState': this.remindersState.toJson()};
   }
 
   static AppState fromJson(dynamic json) {
     return json != null
-        ? AppState(alarmsState: AlarmsState.fromJson(json["alarmsState"]))
+        ? AppState(
+            remindersState: RemindersState.fromJson(json["remindersState"]))
         : {};
   }
 
-  AppState copyWith({AlarmsState alarmsState}) {
-    return AppState(alarmsState: alarmsState ?? this.alarmsState);
+  AppState copyWith({RemindersState remindersState}) {
+    return AppState(remindersState: remindersState ?? this.remindersState);
   }
 }

@@ -1,2 +1,2 @@
-export 'Alarm.dart';
-export 'AlarmNotification.dart';
+export 'Reminder.dart';
+export 'ReminderNotification.dart';

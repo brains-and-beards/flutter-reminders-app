@@ -1,17 +1,17 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class SetAlarmAction {
+class SetReminderAction {
   final String time;
   final RepeatInterval repeat;
   final String name;
 
-  SetAlarmAction({this.time, this.repeat, this.name});
+  SetReminderAction({this.time, this.repeat, this.name});
 }
 
-class RemoveAlarmAction {
+class RemoveReminderAction {
   final String name;
 
-  RemoveAlarmAction(this.name);
+  RemoveReminderAction(this.name);
 }
 
-class ClearAlarmAction {}
+class ClearReminderAction {}

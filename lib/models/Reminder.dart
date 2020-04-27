@@ -1,20 +1,20 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:meta/meta.dart';
 
-class Alarm {
+class Reminder {
   final String time;
   final RepeatInterval repeat;
   final String name;
 
-  const Alarm({
+  const Reminder({
     @required this.time,
     @required this.repeat,
     @required this.name,
   });
 
-  static Alarm fromJson(dynamic json) {
+  static Reminder fromJson(dynamic json) {
     return json != null
-        ? new Alarm(
+        ? new Reminder(
             time: json["time"],
             repeat: parseRepeatIntervalToObject(json["repeat"]),
             name: json["name"])
