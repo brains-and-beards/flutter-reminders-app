@@ -1,16 +1,32 @@
-# hello_world
+# Flutter Reminders app
 
-A new Flutter project.
+A Flutter project which demonstrates using 'redux-persist' and local notifications.
+
+![](1.gif)
+
+## Show some ❤️ and star the repo to support the project
+
+[![GitHub stars](https://img.shields.io/github/stars/brains-and-beards/flutter-reminders-app.svg?style=social&label=Star)](hhttps://github.com/brains-and-beards/flutter-reminders-app) [![GitHub forks](https://img.shields.io/github/forks/brains-and-beards/flutter-reminders-app.svg?style=social&label=Fork)](https://github.com/brains-and-beards/flutter-reminders-app/fork) [![GitHub watchers](https://img.shields.io/github/watchers/brains-and-beards/flutter-reminders-app.svg?style=social&label=Watch)](https://github.com/brains-and-beards/flutter-reminders-app) [![GitHub followers](https://img.shields.io/github/followers/brains-and-beards.svg?style=social&label=Follow)](https://github.com/brains-and-beards/flutter-reminders-app)  
+[![Twitter Follow](https://img.shields.io/twitter/follow/brainsandbeards.svg?style=social)](https://twitter.com/brainsandbeards)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Tutorial Articles for this repository:
 
-A few resources to get you started if this is your first Flutter project:
+[How to add redux-persist to flutter app?](https://brainsandbeards.com/blog/how-to-add-redux-persist-to-flutter-app)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## References
+
+[https://pub.dev/packages/redux_persist](https://pub.dev/packages/redux_persist)
+
+[https://brainsandbeards.com/blog/ultimate-redux-guide-for-flutter](https://brainsandbeards.com/blog/ultimate-redux-guide-for-flutter)
+
+[https://pub.dev/packages/redux](https://pub.dev/packages/redux)
+
+
+## Author & support
+
+<img src="./logo.svg">
+
+[Brains and Beards](https://brainsandbeards.com/)
