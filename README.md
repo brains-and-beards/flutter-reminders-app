@@ -6,7 +6,7 @@ A Flutter project which demonstrates using 'redux-persist' and local notificatio
 
 ## Show some ❤️ and star the repo to support the project
 
-[![GitHub stars](https://img.shields.io/github/stars/brains-and-beards/flutter-reminders-app.svg?style=social&label=Star)](hhttps://github.com/brains-and-beards/flutter-reminders-app) [![GitHub forks](https://img.shields.io/github/forks/brains-and-beards/flutter-reminders-app.svg?style=social&label=Fork)](https://github.com/brains-and-beards/flutter-reminders-app/fork) [![GitHub watchers](https://img.shields.io/github/watchers/brains-and-beards/flutter-reminders-app.svg?style=social&label=Watch)](https://github.com/brains-and-beards/flutter-reminders-app) [![GitHub followers](https://img.shields.io/github/followers/brains-and-beards.svg?style=social&label=Follow)](https://github.com/brains-and-beards/flutter-reminders-app)  
+[![GitHub stars](https://img.shields.io/github/stars/brains-and-beards/flutter-reminders-app.svg?style=social&label=Star)](https://github.com/brains-and-beards/flutter-reminders-app) [![GitHub forks](https://img.shields.io/github/forks/brains-and-beards/flutter-reminders-app.svg?style=social&label=Fork)](https://github.com/brains-and-beards/flutter-reminders-app/fork) [![GitHub watchers](https://img.shields.io/github/watchers/brains-and-beards/flutter-reminders-app.svg?style=social&label=Watch)](https://github.com/brains-and-beards/flutter-reminders-app) [![GitHub followers](https://img.shields.io/github/followers/brains-and-beards.svg?style=social&label=Follow)](https://github.com/brains-and-beards/flutter-reminders-app)  
 [![Twitter Follow](https://img.shields.io/twitter/follow/brainsandbeards.svg?style=social)](https://twitter.com/brainsandbeards)
 
 ## Getting Started
