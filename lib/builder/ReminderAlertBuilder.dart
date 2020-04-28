@@ -10,13 +10,13 @@ import 'package:hello_world/utils/notificationHelper.dart';
 import 'ReminderCustomItem.dart';
 import 'ReminderItem.dart';
 
-final playMusic = 'Play music';
-final lookAfterPlants = 'Look after plants';
-final walk = '5 min walk';
-final drinkingWater = 'Drink some water';
-final custom = 'Custom time';
+const String playMusic = 'Play music';
+const String lookAfterPlants = 'Look after plants';
+const String walk = '5 min walk';
+const String drinkingWater = 'Drink some water';
+const String custom = 'Custom time';
 
-final remindersIcons = {
+const remindersIcons = {
   playMusic: Icons.audiotrack,
   lookAfterPlants: Icons.local_florist,
   walk: Icons.directions_walk,
@@ -219,19 +219,28 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
 
   _prepareState() {
     List<Reminder> list = getStore().state.remindersState.reminders;
-    for (var i = 0; i < list.length; i++) {
-      if (list[i].name == playMusic) {
-        playMusicReminder = true;
-      } else if (list[i].name == lookAfterPlants) {
-        lookAfterPlantsReminder = true;
-      } else if (list[i].name == walk) {
-        walkFor5minReminder = true;
-      } else if (list[i].name == drinkingWater) {
-        drinkSomeWaterReminder = true;
-      } else if (list[i].name == custom) {
-        customReminder = true;
+
+    list.forEach((item) {
+      switch (item.name) {
+        case playMusic:
+          playMusicReminder = true;
+          break;
+        case lookAfterPlants:
+          lookAfterPlantsReminder = true;
+          break;
+        case walk:
+          walkFor5minReminder = true;
+          break;
+        case drinkingWater:
+          drinkSomeWaterReminder = true;
+          break;
+        case custom:
+          customReminder = true;
+          break;
+        default:
+          return;
       }
-    }
+    });
   }
 
   void _configurePlayMusic(bool value) {
