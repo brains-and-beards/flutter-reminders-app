@@ -30,28 +30,42 @@ class Reminder {
   }
 
   static String parseRepeatIntervalToString(RepeatInterval repeat) {
-    if (repeat == RepeatInterval.Daily) {
-      return "Daily";
-    } else if (repeat == RepeatInterval.EveryMinute) {
-      return "EveryMinute";
-    } else if (repeat == RepeatInterval.Hourly) {
-      return "Hourly";
-    } else if (repeat == RepeatInterval.Weekly) {
-      return "Weekly";
+    switch (repeat) {
+      case RepeatInterval.Daily:
+        return "Daily";
+        break;
+      case RepeatInterval.EveryMinute:
+        return "EveryMinute";
+        break;
+      case RepeatInterval.Hourly:
+        return "Hourly";
+        break;
+      case RepeatInterval.Weekly:
+        return "Weekly";
+        break;
+      default:
+        return "Daily";
+        break;
     }
-    return '';
   }
 
   static RepeatInterval parseRepeatIntervalToValue(String repeat) {
-    if (repeat == "Daily") {
-      return RepeatInterval.Daily;
-    } else if (repeat == "EveryMinute") {
-      return RepeatInterval.EveryMinute;
-    } else if (repeat == "Hourly") {
-      return RepeatInterval.Hourly;
-    } else if (repeat == "Weekly") {
-      return RepeatInterval.Weekly;
+    switch (repeat) {
+      case "Daily":
+        return RepeatInterval.Daily;
+        break;
+      case "EveryMinute":
+        return RepeatInterval.EveryMinute;
+        break;
+      case "Hourly":
+        return RepeatInterval.Hourly;
+        break;
+      case "Weekly":
+        return RepeatInterval.Weekly;
+        break;
+      default:
+        return RepeatInterval.Weekly;
+        break;
     }
-    return RepeatInterval.Weekly;
   }
 }

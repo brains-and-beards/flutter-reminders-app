@@ -282,7 +282,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
       getStore().dispatch(SetReminderAction(
           time: new DateTime.now().toIso8601String(),
           name: drinkingWater,
-          repeat: RepeatInterval.Hourly));
+          repeat: RepeatInterval.EveryMinute));
       scheduleNotificationPeriodically(flutterLocalNotificationsPlugin, '3',
           drinkingWater, RepeatInterval.EveryMinute);
     } else {

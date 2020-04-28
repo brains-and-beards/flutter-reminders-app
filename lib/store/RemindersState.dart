@@ -30,8 +30,6 @@ class RemindersState {
 
 List<Reminder> parseList(dynamic json) {
   List<Reminder> list = new List<Reminder>();
-  for (var i = 0; i < json["reminders"].length; i++) {
-    list.add(Reminder.fromJson(json["reminders"][i]));
-  }
+  json["reminders"].forEach((item) => list.add(Reminder.fromJson(item)));
   return list;
 }
