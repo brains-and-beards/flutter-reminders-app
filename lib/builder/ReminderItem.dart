@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,8 +13,10 @@ class ReminderItem extends StatelessWidget {
   ReminderItem({this.checkBoxValue, this.onChanged, this.iconName});
 
   Widget build(BuildContext context) {
+    double margin = Platform.isIOS ? 10 : 5;
+
     return Card(
-        margin: new EdgeInsets.only(left: 0, right: 0, top: 10),
+        margin: new EdgeInsets.only(left: 0, right: 0, top: margin),
         child: CheckboxListTile(
             value: checkBoxValue,
             onChanged: onChanged,
@@ -25,7 +29,7 @@ class ReminderItem extends StatelessWidget {
                     size: 30.0,
                   ),
                   Padding(
-                      padding: new EdgeInsets.only(left: 10),
+                      padding: new EdgeInsets.only(left: margin),
                       child: Text(
                         iconName,
                         style: TextStyle(

@@ -65,8 +65,7 @@ Future<void> scheduleNotification(
     id,
     'Reminder notifications',
     'Remember about it',
-    icon: 'secondary_icon',
-    largeIcon: DrawableResourceAndroidBitmap('sample_large_icon'),
+    icon: 'my_icon',
   );
   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
   var platformChannelSpecifics = NotificationDetails(

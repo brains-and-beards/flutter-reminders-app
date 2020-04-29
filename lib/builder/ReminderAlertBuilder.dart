@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -39,6 +41,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
   bool walkFor5minReminder = false;
   bool drinkSomeWaterReminder = false;
   bool customReminder = false;
+  double margin = Platform.isIOS ? 10 : 5;
 
   TimeOfDay customNotificationTime;
 
@@ -81,7 +84,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                     child: Column(
                       children: [
                         Padding(
-                            padding: new EdgeInsets.only(bottom: 10),
+                            padding: new EdgeInsets.only(bottom: margin),
                             child: Text(
                               'Remind me every day',
                               style: TextStyle(
@@ -101,7 +104,8 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                           iconName: playMusic,
                         ),
                         Padding(
-                            padding: new EdgeInsets.only(bottom: 10, top: 10),
+                            padding: new EdgeInsets.only(
+                                bottom: margin, top: margin),
                             child: Text(
                               'Remind me every week',
                               style: TextStyle(
@@ -121,7 +125,8 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                           iconName: lookAfterPlants,
                         ),
                         Padding(
-                            padding: new EdgeInsets.only(bottom: 10, top: 10),
+                            padding: new EdgeInsets.only(
+                                bottom: margin, top: margin),
                             child: Text(
                               'Remind me every hour',
                               style: TextStyle(
@@ -141,7 +146,8 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                           iconName: walk,
                         ),
                         Padding(
-                            padding: new EdgeInsets.only(bottom: 10, top: 10),
+                            padding: new EdgeInsets.only(
+                                bottom: margin, top: margin),
                             child: Text(
                               'Remind me every minute',
                               style: TextStyle(
@@ -161,7 +167,8 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                           iconName: drinkingWater,
                         ),
                         Padding(
-                            padding: new EdgeInsets.only(bottom: 10, top: 10),
+                            padding: new EdgeInsets.only(
+                                bottom: margin, top: margin),
                             child: Text(
                               'Custom',
                               style: TextStyle(
@@ -184,7 +191,8 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
                           },
                         ),
                         Padding(
-                          padding: new EdgeInsets.only(top: 20, bottom: 10),
+                          padding: new EdgeInsets.only(
+                              top: margin * 2, bottom: margin),
                           child: RaisedButton(
                               color: Colors.blue,
                               onPressed: () {

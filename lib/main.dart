@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/store/AppState.dart';
@@ -11,16 +13,17 @@ import 'builder/ReminderAlertBuilder.dart';
 import 'builder/RemindersListViewBuilder.dart';
 import 'models/index.dart';
 
+final df = new DateFormat('dd-MM-yyyy hh:mm a');
+
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 NotificationAppLaunchDetails notificationAppLaunchDetails;
-
-final df = new DateFormat('dd-MM-yyyy hh:mm a');
+Store<AppState> store;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initStore();
-  final store = getStore();
+  store = getStore();
   notificationAppLaunchDetails =
       await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(flutterLocalNotificationsPlugin);
@@ -83,7 +86,7 @@ class LunchingApp extends StatelessWidget {
                                 builder: (context, reminders) {
                                   return RemindersList(reminders: reminders);
                                 }),
-                            height: 550,
+                            height: Platform.isAndroid ? 420 : 550,
                           ))),
                 ],
               ),
