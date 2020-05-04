@@ -33,19 +33,14 @@ class Reminder {
     switch (repeat) {
       case RepeatInterval.Daily:
         return "Daily";
-        break;
       case RepeatInterval.EveryMinute:
         return "EveryMinute";
-        break;
       case RepeatInterval.Hourly:
         return "Hourly";
-        break;
       case RepeatInterval.Weekly:
         return "Weekly";
-        break;
       default:
         return "Daily";
-        break;
     }
   }
 
@@ -53,19 +48,14 @@ class Reminder {
     switch (repeat) {
       case "Daily":
         return RepeatInterval.Daily;
-        break;
       case "EveryMinute":
         return RepeatInterval.EveryMinute;
-        break;
       case "Hourly":
         return RepeatInterval.Hourly;
-        break;
       case "Weekly":
         return RepeatInterval.Weekly;
-        break;
       default:
         return RepeatInterval.Weekly;
-        break;
     }
   }
 }
