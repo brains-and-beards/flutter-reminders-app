@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:hello_world/store/AppState.dart';
@@ -24,10 +25,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initStore();
   store = getStore();
-  notificationAppLaunchDetails =
-      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-  await initNotifications(flutterLocalNotificationsPlugin);
-  requestIOSPermissions(flutterLocalNotificationsPlugin);
+  // notificationAppLaunchDetails =
+  //     await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  // await initNotifications(flutterLocalNotificationsPlugin);
+  // requestIOSPermissions(flutterLocalNotificationsPlugin);
 
   runApp(LunchingApp(store));
 }
@@ -38,6 +39,7 @@ class LunchingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = kIsWeb ? 550 : Platform.isAndroid ? 420 : 550;
     return StoreProvider<AppState>(
       child: MaterialApp(
           title: 'REMINDERS',
@@ -86,7 +88,7 @@ class LunchingApp extends StatelessWidget {
                                 builder: (context, reminders) {
                                   return RemindersList(reminders: reminders);
                                 }),
-                            height: Platform.isAndroid ? 420 : 550,
+                            height: height,
                           ))),
                 ],
               ),

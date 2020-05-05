@@ -27,10 +27,10 @@ dependencies:
   redux: ^4.0.0
   flutter_local_notifications: ^1.4.1
   flutter_redux: ^0.6.0
-  key_value_store_flutter:
-  shared_preferences:
+  shared_preferences: ^0.5.3
   rxdart: ^0.23.1
-  redux_persist: ^0.8.3
+  redux_persist: ^0.8.4
+  redux_persist_flutter: ^0.8.2
   path_provider: ^1.6.7
   intl: ^0.16.1
 

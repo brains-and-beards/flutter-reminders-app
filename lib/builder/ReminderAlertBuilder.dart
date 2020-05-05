@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -41,7 +42,7 @@ class _ReminderAlertBuilderState extends State<ReminderAlertBuilder> {
   bool walkFor5minReminder = false;
   bool drinkSomeWaterReminder = false;
   bool customReminder = false;
-  double margin = Platform.isIOS ? 10 : 5;
+  double margin = kIsWeb ? 10 : Platform.isIOS ? 10 : 5;
 
   TimeOfDay customNotificationTime;
 

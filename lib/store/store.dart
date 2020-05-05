@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:hello_world/reducers/AppStateReducer.dart';
 import 'package:hello_world/store/AppState.dart';
 import 'package:redux/redux.dart';
-import 'package:redux_persist/redux_persist.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:redux_persist/redux_persist.dart';
+import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 
 Store<AppState> store;
 Future<String> get _localPath async {
@@ -20,7 +22,9 @@ Future<File> get _localFile async {
 
 Future<Store<AppState>> createStore() async {
   final persistor = Persistor<AppState>(
-    storage: FileStorage(await _localFile),
+    storage: kIsWeb
+        ? FlutterStorage(location: FlutterSaveLocation.sharedPreferences)
+        : FileStorage(await _localFile),
     serializer: JsonSerializer<AppState>(AppState.fromJson),
     debug: true,
   );
