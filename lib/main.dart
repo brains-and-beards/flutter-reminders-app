@@ -29,12 +29,12 @@ Future<void> main() async {
   await initNotifications(flutterLocalNotificationsPlugin);
   requestIOSPermissions(flutterLocalNotificationsPlugin);
 
-  runApp(LunchingApp(store));
+  runApp(LaunchingApp(store));
 }
 
-class LunchingApp extends StatelessWidget {
+class LaunchingApp extends StatelessWidget {
   final Store<AppState> store;
-  LunchingApp(this.store);
+  LaunchingApp(this.store);
 
   @override
   Widget build(BuildContext context) {
