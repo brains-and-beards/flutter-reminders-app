@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:hello_world/utils/screenTypeHelper.dart';
+import 'package:responsive_widgets/responsive_widgets.dart';
 import 'package:hello_world/store/AppState.dart';
 import 'package:hello_world/store/store.dart';
 import 'package:hello_world/utils/notificationHelper.dart';
@@ -39,64 +41,91 @@ class LunchingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = kIsWeb ? 550 : Platform.isAndroid ? 420 : 550;
-    return StoreProvider<AppState>(
-      child: MaterialApp(
-          title: 'REMINDERS',
-          home: Scaffold(
+    return new MaterialApp(title: 'REMINDERS', home: new MainWidget());
+  }
+}
+
+class MainWidget extends StatefulWidget {
+  @override
+  _MainWidgetState createState() => _MainWidgetState();
+}
+
+class _MainWidgetState extends State<MainWidget> {
+  @override
+  Widget build(BuildContext context) {
+    ResponsiveWidgets.init(
+      context,
+      height: 1920,
+      width: 1080,
+      allowFontScaling: true,
+    );
+
+    MediaQueryData mediaQuery = MediaQuery.of(context);
+    double height = isDesktop(context)
+        ? mediaQuery.devicePixelRatio * mediaQuery.size.height * 0.6
+        : mediaQuery.devicePixelRatio * mediaQuery.size.height * 0.5;
+    double width = isLanscapeNotchDevice(context)
+        ? mediaQuery.size.width
+        : mediaQuery.devicePixelRatio * mediaQuery.size.width;
+
+    return ResponsiveWidgets.builder(
+        allowFontScaling: true,
+        child: Scaffold(
             appBar: AppBar(
               title: Text('Reminders App'),
             ),
-            body: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.all(10),
-                          child: ReminderAlertBuilder()),
-                      Padding(
-                          padding: EdgeInsets.all(10),
-                          child: NotificationSwitchBuilder()),
-                    ],
-                  ),
-                  Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        "Reminders list",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      )),
-                  Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.blue,
-                              width: 2,
+            body: StoreProvider<AppState>(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsetsResponsive.all(
+                                isLanscapeNotchDevice(context) ? 20 : 10),
+                            child: ReminderAlertBuilder()),
+                        Padding(
+                            padding: EdgeInsetsResponsive.all(
+                                isLanscapeNotchDevice(context) ? 50 : 10),
+                            child: NotificationSwitchBuilder()),
+                      ],
+                    ),
+                    Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          "Reminders list",
+                          style: TextStyle(
+                              fontSize: ScreenUtil().setSp(50),
+                              fontWeight: FontWeight.bold),
+                        )),
+                    Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.blue,
+                                width: 2,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15.0)),
                             ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15.0)),
-                          ),
-                          child: SizedBox(
-                            child: StoreConnector<AppState, List<Reminder>>(
-                                converter: (store) =>
-                                    store.state.remindersState.reminders,
-                                builder: (context, reminders) {
-                                  return RemindersList(reminders: reminders);
-                                }),
-                            height: height,
-                          ))),
-                ],
+                            child: SizedBoxResponsive(
+                              child: StoreConnector<AppState, List<Reminder>>(
+                                  converter: (store) =>
+                                      store.state.remindersState.reminders,
+                                  builder: (context, reminders) {
+                                    return RemindersList(reminders: reminders);
+                                  }),
+                              width: width,
+                              height: height,
+                            ))),
+                  ],
+                ),
               ),
-            ),
-          )),
-      store: store,
-    );
-
-    ;
+              store: getStore(),
+            )));
   }
 }

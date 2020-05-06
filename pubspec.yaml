@@ -33,6 +33,7 @@ dependencies:
   redux_persist_flutter: ^0.8.2
   path_provider: ^1.6.7
   intl: ^0.16.1
+  responsive_widgets: ^2.0.1
 
 dev_dependencies:
   flutter_test:

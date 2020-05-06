@@ -34,7 +34,7 @@ class ReminderItem extends StatelessWidget {
                       child: Text(
                         iconName,
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Colors.black,
                             decoration: TextDecoration.none,
                             fontWeight: FontWeight.normal),
