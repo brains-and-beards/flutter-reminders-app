@@ -55,8 +55,6 @@ class _MainWidgetState extends State<MainWidget> {
   Widget build(BuildContext context) {
     ResponsiveWidgets.init(
       context,
-      height: 1920,
-      width: 1080,
       allowFontScaling: true,
     );
 
@@ -64,7 +62,7 @@ class _MainWidgetState extends State<MainWidget> {
     double height = isDesktop(context)
         ? mediaQuery.devicePixelRatio * mediaQuery.size.height * 0.6
         : mediaQuery.devicePixelRatio * mediaQuery.size.height * 0.5;
-    double width = isLanscapeNotchDevice(context)
+    double width = isLandscapeNotchDevice(context)
         ? mediaQuery.size.width
         : mediaQuery.devicePixelRatio * mediaQuery.size.width;
 

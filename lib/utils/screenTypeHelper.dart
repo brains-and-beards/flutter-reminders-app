@@ -37,14 +37,14 @@ bool isDesktop(BuildContext context) {
 }
 
 bool isMobile(BuildContext context) {
-  return displayTypeOf(context) == DisplayType.desktop;
+  return displayTypeOf(context) == DisplayType.mobile;
 }
 
 bool isTablet(BuildContext context) {
-  return displayTypeOf(context) == DisplayType.desktop;
+  return displayTypeOf(context) == DisplayType.tablet;
 }
 
-bool isLanscapeNotchDevice(BuildContext context) {
+bool isLandscapeNotchDevice(BuildContext context) {
   final orientation = MediaQuery.of(context).orientation;
   final padding = MediaQuery.of(context).viewPadding;
 
