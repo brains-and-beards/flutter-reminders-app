@@ -55,6 +55,8 @@ class _MainWidgetState extends State<MainWidget> {
   Widget build(BuildContext context) {
     ResponsiveWidgets.init(
       context,
+      height: 1920,
+      width: 1080,
       allowFontScaling: true,
     );
 
@@ -83,11 +85,11 @@ class _MainWidgetState extends State<MainWidget> {
                       children: <Widget>[
                         Padding(
                             padding: EdgeInsetsResponsive.all(
-                                isLanscapeNotchDevice(context) ? 20 : 10),
+                                isLandscapeNotchDevice(context) ? 20 : 10),
                             child: ReminderAlertBuilder()),
                         Padding(
                             padding: EdgeInsetsResponsive.all(
-                                isLanscapeNotchDevice(context) ? 50 : 10),
+                                isLandscapeNotchDevice(context) ? 50 : 10),
                             child: NotificationSwitchBuilder()),
                       ],
                     ),
